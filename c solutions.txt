@@ -1,0 +1,277 @@
+1,
+ #include <stdio.h>
+
+int main()
+{
+    int a, b;
+    float x, y;
+
+    scanf("%d %d", &a, &b);
+    scanf("%f %f", &x, &y);
+
+    printf("%d %d\n", a + b, a - b);
+    printf("%.1f %.1f\n", x + y, x - y);
+
+    return 0;
+}
+
+2,
+#include <stdio.h>
+
+int max_of_four(int a, int b, int c, int d)
+{
+    int max = a;
+
+    if (b > max)
+        max = b;
+
+    if (c > max)
+        max = c;
+
+    if (d > max)
+        max = d;
+
+    return max;
+}
+
+int main() {
+    int a, b, c, d;
+    scanf("%d %d %d %d", &a, &b, &c, &d);
+    int ans = max_of_four(a, b, c, d);
+    printf("%d", ans);
+    return 0;
+}
+
+3,
+#include <stdio.h>
+
+int main()
+{
+    int a, b;
+
+    scanf("%d\n%d", &a, &b);
+
+    for (int n = a; n <= b; n++)
+    {
+        if (n == 1)
+            printf("one\n");
+        else if (n == 2)
+            printf("two\n");
+        else if (n == 3)
+            printf("three\n");
+        else if (n == 4)
+            printf("four\n");
+        else if (n == 5)
+            printf("five\n");
+        else if (n == 6)
+            printf("six\n");
+        else if (n == 7)
+            printf("seven\n");
+        else if (n == 8)
+            printf("eight\n");
+        else if (n == 9)
+            printf("nine\n");
+        else if (n % 2 == 0)
+            printf("even\n");
+        else
+            printf("odd\n");
+    }
+
+    return 0;
+}
+
+4,
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+void calculate_the_maximum(int n, int k) {
+    int max_and = 0, max_or = 0, max_xor = 0;
+
+    for (int a = 1; a <= n; a++) {
+        for (int b = a + 1; b <= n; b++) {
+            int and_result = a & b;
+            int or_result  = a | b;
+            int xor_result = a ^ b;
+
+            if (and_result < k && and_result > max_and)
+                max_and = and_result;
+            if (or_result < k && or_result > max_or)
+                max_or = or_result;
+            if (xor_result < k && xor_result > max_xor)
+                max_xor = xor_result;
+        }
+    }
+
+    printf("%d\n%d\n%d\n", max_and, max_or, max_xor);
+}
+
+int main() {
+    int n, k;
+
+    scanf("%d %d", &n, &k);
+    calculate_the_maximum(n, k);
+
+    return 0;
+
+}
+
+5,
+#include <assert.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char* readline();
+char* ltrim(char*);
+char* rtrim(char*);
+
+int parse_int(char*);
+
+int main()
+{
+    char* n_endptr;
+    char* n_str = readline();
+    int n = strtol(n_str, &n_endptr, 10);
+
+    if (n_endptr == n_str || *n_endptr != '\0') { exit(EXIT_FAILURE); }
+
+    // Write Your Code Here
+    if (n == 1) {
+        printf("one");
+    }
+    else if (n == 2) {
+        printf("two");
+    }
+    else if (n == 3) {
+        printf("three");
+    }
+    else if (n == 4) {
+        printf("four");
+    }
+    else if (n == 5) {
+        printf("five");
+    }
+    else if (n == 6) {
+        printf("six");
+    }
+    else if (n == 7) {
+        printf("seven");
+    }
+    else if (n == 8) {
+        printf("eight");
+    }
+    else if (n == 9) {
+        printf("nine");
+    }
+    else {
+        printf("Greater than 9");
+    }
+
+    return 0;
+}
+
+char* readline() {
+    size_t alloc_length = 1024;
+    size_t data_length = 0;
+
+    char* data = malloc(alloc_length);
+
+    while (true) {
+        char* cursor = data + data_length;
+        char* line = fgets(cursor, alloc_length - data_length, stdin);
+
+        if (!line) {
+            break;
+        }
+
+        data_length += strlen(cursor);
+
+        if (data_length < alloc_length - 1 || data[data_length - 1] == '\n') {
+            break;
+        }
+
+        alloc_length <<= 1;
+
+        data = realloc(data, alloc_length);
+
+        if (!data) {
+            data = '\0';
+
+            break;
+        }
+    }
+
+    if (data[data_length - 1] == '\n') {
+        data[data_length - 1] = '\0';
+
+        data = realloc(data, data_length);
+
+        if (!data) {
+            data = '\0';
+        }
+    } else {
+        data = realloc(data, data_length + 1);
+
+        if (!data) {
+            data = '\0';
+        } else {
+            data[data_length] = '\0';
+        }
+    }
+
+    return data;
+}
+
+char* ltrim(char* str) {
+    if (!str) {
+        return '\0';
+    }
+
+    if (!*str) {
+        return str;
+    }
+
+    while (*str != '\0' && isspace(*str)) {
+        str++;
+    }
+
+    return str;
+}
+
+char* rtrim(char* str) {
+    if (!str) {
+        return '\0';
+    }
+
+    if (!*str) {
+        return str;
+    }
+
+    char* end = str + strlen(str) - 1;
+
+    while (end >= str && isspace(*end)) {
+        end--;
+    }
+
+    *(end + 1) = '\0';
+
+    return str;
+}
+
+int parse_int(char* str) {
+    char* endptr;
+    int value = strtol(str, &endptr, 10);
+
+    if (endptr == str || *endptr != '\0') {
+        exit(EXIT_FAILURE);
+    }
+
+    return value;
+}
